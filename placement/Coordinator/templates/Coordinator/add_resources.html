@@ -1,0 +1,74 @@
+{% extends 'Coordinator/shared/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-12">
+                <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+
+                        <h3>Add Resources Details</h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+
+
+
+                            <div class="form-floating mb-3">
+
+
+                                <select class="form-control" name="dept_id" id="firstDropdown"
+                                    onchange="handleFirstDropdownChange(this)">
+                                    <option value="Select">Select Department</option>
+
+
+                                    {% for i in dept %}
+
+                                    <option value="{{i.id }}">{{ i.dept_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="floatingInput">Select Department Name</label>
+                            </div>
+
+
+
+
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" autocomplete="off" required name="topic"
+                                    id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Topic Name</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="file" class="form-control" autocomplete="off" required name="re_s"
+                                    id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Document</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">SUBMIT</button>
+                        
+                        </div>
+                        <div class="col-6">
+
+
+
+                    </div>
+                  
+
+
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Sign In End -->
+{% endblock content %}

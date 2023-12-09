@@ -1,0 +1,159 @@
+{% extends 'admin/shared/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        {% for i in data %}
+        <form action="/adminapp/admin_teacher_update/{{i.id}}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-12">
+
+
+                <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+
+                        <h3>EDIT TEACHER DETAILS</h3>
+                    </div>
+
+
+                  
+
+                    <div class="row">
+                        <div class="col-6">
+
+
+
+                            <div class="form-floating mb-3">
+
+
+                                <select class="form-control" name="dept_id" id="firstDropdown"
+                                    onchange="handleFirstDropdownChange(this)">
+                                    <option value="{{ i.department_id.id }}">{{ i.department_id.dept_name }}</option>
+
+
+                                    {% for j in dept %}
+
+                                    <option value="{{j.id }}">{{ j.dept_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="floatingInput">Select Department Name</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <select class="form-control" name="course_id" id="secondDropdown">
+                                    <option value="{{ i.course_id.id }}">{{ i.course_id.course_name }}</option>
+                                </select>
+                                <label for="floatingInput">Select Course Name</label>
+                            </div>
+
+
+
+                            <div class="form-floating mb-3">
+                                <input type="text" value={{ i.teacher_id.first_name }} class="form-control"
+                                    autocomplete="off" required name="first_name" id="floatingInput"
+                                    placeholder="name@example.com">
+                                <label for="floatingInput">First Name</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" value="{{ i.teacher_id.last_name }}" class="form-control"
+                                    autocomplete="off" required name="last_name" id="floatingInput"
+                                    placeholder="name@example.com">
+                                <label for="floatingInput">Last Name</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                {% comment %} {% endcomment %}
+
+                                <textarea placeholder="name@example.com" style=" height: 132px;" name="address"
+                                    class="form-control " id="floatingInput" cols="30"
+                                    rows="10">{{ i.address }} </textarea>
+                                <label for="floatingInput">Address</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+
+                            <div class="form-floating mb-3">
+                                <input type="email" value={{ i.teacher_id.email }} class="form-control"
+                                    autocomplete="off" required name="email" id="floatingInput"
+                                    placeholder="name@example.com">
+                                <label for="floatingInput">Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" value={{ i.phone_number }} class="form-control" autocomplete="off"
+                                    required name="phone" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Phone Number</label>
+                            </div>
+
+
+
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" value={{ i.salary }} autocomplete="off"
+                                    required name="salary" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Salary</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" value="{{ i.experience }}" autocomplete="off"
+                                    required name="experience" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Experience</label>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary py-3 w-100 mb-4">SUBMIT</button>
+
+                </div>
+            </div>
+
+    </div>
+
+
+</div>
+</form>
+</div>
+</div>
+
+<script>
+    function handleFirstDropdownChange(selectObject) {
+        var selectedValue = selectObject.value;
+
+        // Make an AJAX request to the server
+        // Pass the selected value of the first dropdown as a parameter
+
+        // Example using jQuery AJAX
+        $.ajax({
+            url: '/adminapp/get_second_dropdown_data/',  // URL to your Django view
+            data: { firstDropdownValue: selectedValue },
+            dataType: 'json',
+            success: function (response) {
+                // Update the options in the second dropdown based on the server response
+                var secondDropdown = document.getElementById('secondDropdown');
+                secondDropdown.innerHTML = '';  // Clear existing options
+
+                // Loop through the response and create new options
+                for (var i = 0; i < response.length; i++) {
+                    var option = document.createElement('option');
+                    option.value = response[i].id;
+                    option.text = response[i].course_name;
+                    secondDropdown.appendChild(option);
+                }
+            }
+        });
+    }
+</script>
+
+
+<!-- Sign In End -->
+{% endblock content %}

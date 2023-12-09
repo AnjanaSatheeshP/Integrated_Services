@@ -1,0 +1,111 @@
+{% extends 'teacher/shared/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-10">
+                <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+
+                        <h3>Add Academic Uploads</h3>
+                    </div>
+
+
+
+
+
+
+
+                    {% for i in data %}
+                    <div class="form-floating mb-3">
+                        <input type="file" class="form-control"  autocomplete="off" name="first_internal"
+                            id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">First Internal</label>
+                        {% if i.first_internal %}
+                        <a href="{{ i.first_internal.url }}" download>Download First File</a>
+                        {% else %}
+                        No file uploaded
+                        {% endif %}
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="file" class="form-control" autocomplete="off" name="second_internal"
+                            id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput">Second Internal</label>
+                        {% if i.second_internal %}
+                        <a href="{{ i.second_internal.url }}" download>Download Second File</a>
+                        {% else %}
+                        No file uploaded
+                        {% endif %}
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="file" class="form-control" autocomplete="off" name="NCC" id="floatingInput"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">NCC</label>
+                        {% if i.NCC %}
+                        <a href="{{ i.NCC.url }}" download>Download NCC File</a>
+                        {% else %}
+                        No file uploaded
+                        {% endif %}
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="file" class="form-control" autocomplete="off" name="NSS" id="floatingInput"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">NSS</label>
+                        {% if i.NSS %}
+                        <a href="{{ i.NSS.url }}" download>Download NSS File</a>
+                        {% else %}
+                        No file uploaded
+                        {% endif %}
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="file" class="form-control" autocomplete="off" name="sports" id="floatingInput"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Sports</label>
+                        {% if i.Sports %}
+                        <a href="{{ i.Sports.url }}" download>Download Sports File</a>
+                        {% else %}
+                        No file uploaded
+                        {% endif %}
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="file" class="form-control" autocomplete="off" name="attendence" id="floatingInput"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Attendence</label>
+                        {% if i.attendence %}
+                        <a href="{{ i.attendence.url }}" download>Download Attendence File</a>
+                        {% else %}
+                        No file uploaded
+                        {% endif %}
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="file" class="form-control" autocomplete="off" name="others" id="floatingInput"
+                            placeholder="name@example.com">
+                        <label for="floatingInput">Others</label>
+                        {% if i.others %}
+                        <a href="{{ i.others.url }}" download>Download Others File</a>
+                        {% else %}
+                        No file uploaded
+                        {% endif %}
+                    </div>
+
+
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary py-3 w-100 mb-4">SUBMIT</button>
+  
+
+
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Sign In End -->
+{% endblock content %}
