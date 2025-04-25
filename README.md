@@ -55,3 +55,6 @@ This platform aims to bridge the gap between service seekers and local laborers 
    ```bash
    git clone https://github.com/your-username/integrated-services-portal.git
    cd integrated-services-portal
+   python -m venv env
+   env\Scripts\activate
+   python manage.py runserver
