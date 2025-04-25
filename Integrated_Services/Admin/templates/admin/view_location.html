@@ -1,0 +1,112 @@
+{% extends 'admin/shared/base1.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 40%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border: 1px solid #ddd; /* Add border for the entire table */
+    }
+
+    th, td {
+        border: 1px solid transparent; /* Make borders transparent initially */
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .action-buttons a {
+        text-decoration: none;
+        color: #f2f2f2;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .btn-warning {
+        background-color: #293157;
+        border-color: #eea236;
+    }
+
+    .btn-danger {
+        background-color: #293157;
+        border-color: #d43f3a;
+    }
+
+    .text-center {
+        text-align: center;
+        color: #fcf9f9;
+    }
+</style>
+<br>
+    <div style="text-align: center;">
+        <h2 style="color: #293157;">View Location</h2>
+    </div>
+    <div class="container">
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{ i.loc_name }}</td>
+                <td class="action-buttons">
+                    <a href="{% url 'admin_location_edit' id=i.id %}" class="btn btn-warning btn-xs"><i
+                            class="fas fa-edit"></i> Edit</a>
+                    <a href="{% url 'admin_location_delete' id=i.id %}" class="btn btn-danger btn-xs"><i
+                            class="glyphicon glyphicon-trash"></i> Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+            {% if not data %}
+            <tr>
+                <td colspan="2" class="text-center">No Items List</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

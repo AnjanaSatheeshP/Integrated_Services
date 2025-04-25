@@ -1,0 +1,168 @@
+{% extends 'Employee/shared/base1.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 50%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h2 {
+        color: #293157;
+    }
+
+    form {
+        width: 100%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .form-row>div {
+        width: 48%; /* Adjust as needed */
+    }
+
+    select,
+    input,
+    textarea {
+        width: 100%;
+        padding: 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #b3d1e0;
+        border-radius: 4px;
+    }
+
+    button {
+        background-color: #0c1720;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+<br>
+<h2 style="text-align: center;">Update Employee Details</h2>
+
+<div class="container">
+    <form action="" method="post" enctype="multipart/form-data"
+        onsubmit="var textBoxValue = document.getElementById('numberInput').value; var regex = /^\d{10}$/; if (!regex.test(textBoxValue)) { alert('Please enter exactly 10 digits.'); return false; } return true;">
+        {% csrf_token %}
+        <div class="form-row">
+            <select class="form-control" name="dept_id" id="firstDropdown"
+                onchange="handleFirstDropdownChange(this)">
+                <option value="{{ data.department_id.dept_name }}">{{ data.department_id.dept_name }}</option>
+                {% for i in dept %}
+                <option value="{{i.dept_name }}">{{ i.dept_name }}</option>
+                {% endfor %}
+            </select>
+            &nbsp;&nbsp;&nbsp;
+            <input type="email" class="form-control" value="{{ data.employee_id.email }}" autocomplete="off" required name="email" id="floatingInput"
+                placeholder="Email">
+          
+        </div>
+        <div class="form-row">
+            <input type="text" class="form-control" value="{{ data.employee_id.first_name }}" autocomplete="off" required name="first_name" id="floatingInput"
+            placeholder="First Name">
+            &nbsp;&nbsp;&nbsp;
+
+            <input type="text" class="form-control" autocomplete="off" value="{{ data.employee_id.last_name }}" required name="last_name" id="floatingInput"
+                placeholder="Last Name">
+           
+        </div>
+
+        <div class="form-row">
+            <input type="number" pattern="^[0-9]*$" maxlength="10" value="{{ data.phone_number }}" autocomplete="off" required name="phone"
+            id="numberInput" placeholder="Phone Number">
+            &nbsp;&nbsp;&nbsp;
+
+            <textarea placeholder="Address" style=" height: 60px;" value="" name="address" class="form-control "
+            id="floatingInput" cols="30" rows="1">{{ data.address }}</textarea>
+            
+        </div>
+
+        <div class="form-row">
+            <input type="number" class="form-control" value="{{ data.experience }}"  autocomplete="off" required name="experience" id="floatingInput"
+            placeholder="Experience">
+            &nbsp;&nbsp;&nbsp;
+
+           
+        </div>
+
+        <!-- <div class="form-row">
+                <input type="text" class="form-control" autocomplete="off" required name="username" id="floatingInput"
+                placeholder="Username">
+                &nbsp;&nbsp;&nbsp;
+
+            <input type="password" class="form-control" autocomplete="off" required name="password" id="floatingInput"
+                placeholder="Password">
+        </div> -->
+
+        <div class="card-footer">
+            <button type="submit">SUBMIT</button>
+        </div>
+    </form>
+
+    <script>
+        function handleFirstDropdownChange(selectObject) {
+            var selectedValue = selectObject.value;
+
+            // Make an AJAX request to the server
+            // Pass the selected value of the first dropdown as a parameter
+
+            // Example using jQuery AJAX
+            $.ajax({
+                url: '/adminapp/get_second_dropdown_data/', // URL to your Django view
+                data: {
+                    firstDropdownValue: selectedValue
+                },
+                dataType: 'json',
+                success: function (response) {
+                    // Update the options in the second dropdown based on the server response
+                    var secondDropdown = document.getElementById('secondDropdown');
+                    secondDropdown.innerHTML = ''; // Clear existing options
+
+                    // Loop through the response and create new options
+                    for (var i = 0; i < response.length; i++) {
+                        var option = document.createElement('option');
+                        option.value = response[i].id;
+                        option.text = response[i].course_name;
+                        secondDropdown.appendChild(option);
+                    }
+                }
+            });
+        }
+    </script>
+
+    <!-- Sign In End -->
+
+<!-- Sign In End -->
+{% endblock content %}

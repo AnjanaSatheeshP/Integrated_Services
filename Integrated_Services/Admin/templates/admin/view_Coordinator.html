@@ -1,0 +1,180 @@
+{% extends 'admin/shared/base1.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    .container {
+        width: 40%;
+        margin: 0 auto;
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h2 {
+        color: #293157;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    label {
+        margin-bottom: 10px;
+        color: #293157;
+    }
+
+    select {
+        width: 150%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #293157;
+        color: #fff;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #1c2a4e;
+    }
+</style>
+<br>
+
+<div class="container">
+    <div>
+        <h2>View Employee Details</h2>
+    </div>
+
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                <select name="dept_id" id="firstDropdown" onchange="handleFirstDropdownChange(this)">
+                    <option value="Select">Select Work Type</option>
+                    {% for i in dept %}
+                    <option value="{{i.id }}">{{ i.dept_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+</div>
+
+<hr>
+<div style="text-align: center; margin-top: 20px;">
+    <div class="table-container">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Work Type</th>
+                    <th>Phone Number</th>
+                    <th>Salary</th>
+                    <th>Experience</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td class="name">{{ i.employee_id.first_name }} {{ i.employee_id.last_name }}</td>
+                    <td>{{ i.employee_id.email }}</td>
+                    <td>{{ i.department_id.dept_name }}</td>
+                    <td>{{ i.phone_number }}</td>
+                    <td>{{ i.salary }}</td>
+                    <td>{{ i.experience }}</td>
+                    <td class="action-buttons">
+                        <a href="{% url 'admin_Coordinator_delete' id=i.id %}" class="btn btn-danger btn-xs"><i
+                                class="fa fa-trash"></i> Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                {% if not data %}
+                <tr>
+                    <td colspan="7" class="text-center">No Items List</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .custom-table .name {
+        white-space: nowrap;
+        /* Prevent line breaks */
+    }
+
+    .table-container {
+        margin: 0 auto;
+        /* Center the table */
+        width: 50%;
+        /* Adjust the width as needed */
+    }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        align-items: center;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        border: 1px solid transparent;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .custom-table th {
+        background-color: #293157;
+        color: #f2f2f2;
+    }
+
+    .custom-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+
+    }
+
+    .custom-table .action-buttons a {
+        text-decoration: none;
+        color: #f2f2f2;
+        padding: 8px 15px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .custom-table .btn-danger {
+        background-color: #293157;
+        border-color: #d43f3a;
+    }
+
+    .custom-table .text-center {
+        text-align: center;
+        color: #060606;
+    }
+</style>
+
+
+{% endblock content %}

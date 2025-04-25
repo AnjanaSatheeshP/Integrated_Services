@@ -1,0 +1,116 @@
+{% extends 'customer/shared/base1.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    .add-job-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .job-form {
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.341);
+        margin: 20px auto;
+        width: 50%;
+    }
+
+    h3 {
+        color: #07072b;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+    
+        margin-bottom: 5px;
+        color: #07072b;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 50%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #293157;
+        color: #f2f2f2;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+<br>
+<h3 style="color: #07072b; text-align: center;">Add Job Details</h3>
+
+
+<div class="add-job-container">
+    <div class="job-form">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="firstDropdown">Work Type</label>
+                <select name="dept_id" id="firstDropdown" onchange="handleFirstDropdownChange(this)">
+                    <option value="Select">Select Work Type</option>
+                    {% for i in dept %}
+                    <option value="{{i.id }}">{{ i.dept_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+          
+            <div class="form-group">
+                <label for="work_date">Work Date</label>
+                <input type="date" autocomplete="off" required name="work_date" id="date" min="" max="">
+            </div>
+            <div class="form-group">
+                <label for="work_details">Work Details</label>
+                <textarea style="height:70px" name="work_details" id="work_details" cols="30" rows="90"></textarea>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-info py-3 w-50 mb-4">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <script>
+        // Get today's date in the format YYYY-MM-DD
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+console.log(today)
+        // Set the minimum date for the input field
+        document.getElementById("date").setAttribute("min", today);
+////////////////////max date
+
+        var today = new Date();
+        // Add 30 days to today's date
+        var maxDate = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
+        
+        // Format the date to YYYY-MM-DD
+        var yyyy = maxDate.getFullYear();
+        var mm = String(maxDate.getMonth() + 1).padStart(2, '0');
+        var dd = String(maxDate.getDate()).padStart(2, '0');
+
+        // Set the maximum date for the input field
+        document.getElementById("date").setAttribute("max", yyyy + '-' + mm + '-' + dd);
+    </script>
+
+{% endblock content %}
+
+

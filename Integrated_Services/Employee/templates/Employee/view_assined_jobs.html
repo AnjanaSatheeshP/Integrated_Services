@@ -1,0 +1,113 @@
+{% extends 'Employee/shared/base1.html' %}
+
+{% block content %}
+<style>
+    .table-container {
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    .custom-table {
+        width: 50%;
+        border-collapse: collapse;
+        margin: 20px auto;
+        border: 1px solid #ddd;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        border: 1px solid transparent;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .custom-table th {
+        background-color: #293157;
+        color: #f2f2f2;
+    }
+
+    .custom-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .custom-table .action-buttons a {
+        text-decoration: none;
+        color: #f2f2f2;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .custom-table .btn-warning {
+        background-color: #293157;
+        border-color: #eea236;
+    }
+</style>
+
+<div class="table-container">
+    <div>
+        <div>
+            <div>
+                <h2 style="color: #293157;">Assigned Work Details</h2>
+            </div>
+            <div>
+                {% if result %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Work Type</th>
+                            <th scope="col">Work Details</th>
+                            <th scope="col">Work Date</th>
+                            <th scope="col">Work Status</th>
+                            <th scope="col">Update Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in result %}
+                        <tr>
+                            <td>{{i.first_name}} {{i.last_name}}</td>
+                            <td>{{i.email}}</td>
+                            <td>{{i.address}}</td>
+                            <!-- <td>{{i.loc_name}}</td> -->
+                            {% if i.lat != "" and i.lng != "" %}
+                            <td><a target="_blank" href="{% url 'emp_view_loc' i.lat   i.lng  %}">View</a></td>
+                            {% else %}
+                            <td> <b>Location is not set in Map</b> </td>
+                            {% endif %}
+                            <td>{{i.dept_name}}</td>
+                            <td>{{i.work_details}}</td>
+                            <td>{{i.work_date}}</td>
+                            <td><b>{{i.status}}</b></td>
+                            <td class="action-buttons">
+                                <form action="" method="post" class="form-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="jid" value="{{ i.id }}">
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="--">-----</option>
+                                        <option value="OnGoing">On Going</option>
+                                        <option value="Completed">Completed</option>
+                                    </select><br>
+                                    <button
+                                        style="display: inline-block; text-decoration: none; color: #fff; padding: 8px 15px; background-color:#293157; border: 1px solid #46b8da; border-radius: 5px;">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+                {% else %}
+                <h3>No Data To Display</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

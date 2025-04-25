@@ -1,0 +1,66 @@
+
+{% extends 'customer/shared/base1.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>body {
+    font-family: 'Arial', sans-serif;
+   
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 30%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(12, 12, 12, 0.264);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    color: #293157;
+}
+
+form {
+    width: 70%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-row {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-row>div {
+    width: 38%; /* Adjust as needed */
+}
+
+</style>
+<center>
+    <br><Br>
+    
+        <center>
+            <br><br>
+            <div class="container">
+                <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+
+                <p>Email: {{ user.email }}</p>
+                <p>Phone Number: {{ user.phone_number }}</p>
+                <p>Address: {{ user.address }}</p>
+                <!-- Display other fields as needed -->
+            </div>
+        </center>
+
+{% endblock content %}

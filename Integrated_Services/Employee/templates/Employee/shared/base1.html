@@ -1,0 +1,206 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>IService - Employee</title>
+
+    <!-- Include your Google Fonts and Vendor CSS Files here -->
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .menu-bar {
+            text-align: center;
+            background-color: rgba(231, 230, 230, 0.986);
+            padding: 20px; 
+            border-radius: 10px; 
+        }
+
+        .navbar {
+            padding: 10px;
+            text-align: center;
+            color: #07072b;
+            position: relative;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            padding: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #07072b;
+            text-shadow: #07072b;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px;
+        }
+
+        .navbar li {
+            margin-right: 20px;
+            float: left;
+        }
+
+        .navbar li a {
+            display: block;
+            color: #07072b;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: color 0.3s ease, text-decoration 0.3s ease; /* Added transition for text-decoration */
+            border-bottom: 2px solid transparent; /* Initial transparent underline */
+        }
+
+        .navbar li a:hover {
+            color: #070717;/* Change the color on hover */
+            text-shadow: #ecf0f1;
+            border-bottom-color: #070717;
+            border-width: 10%;
+             /* Change the underline color on hover */
+        }
+
+        .navbar .mobile-nav-toggle {
+            display: none;
+        }
+        .dashboard-container {
+          background-color: #070717;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    padding: 20px; /* Add padding for better visual appeal */
+}
+      
+
+        .dashboard-menu {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .dashboard-menu li {
+            margin-bottom: 20px;
+        }
+
+        .dashboard-menu a {
+            text-decoration: none;
+            color: #ecf0f1;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+        }
+
+        .dashboard-menu a:hover {
+            background-color: #3d3482;
+            color: #ecf0f1;
+            opacity: 0.8;
+        }
+
+        .dashboard-menu .dropdown ul {
+            display: none;
+            background-color: #070717;
+            width: 200px;
+        }
+
+        .dashboard-menu .dropdown:hover ul {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Menu Bar -->
+    <div class="menu-bar">
+      <nav id="navbar" class="navbar">
+        <ul>
+            <li><a class="nav-link scrollto" href="{% url 'Employeehome' %}#Employee-home">Home</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'emp_editprofile' %}">Edit Profile</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'accounts_logout' %}">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+    </div>
+
+   
+    <!-- Navigation Bar -->
+    
+
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+      <h2 style="color:white">Employee</h2>
+
+        <ul class="dashboard-menu">
+          <li><a></a></li>
+          <li><a class="nav-link scrollto " href="{% url 'view_assined_jobs' %}">View Assigned</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'emp_view_completed_jobs' %}">View Completed Job  Details</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'emp_created_amount' %}">Payment Details</a></li>
+        </ul>
+    </div>
+
+  
+    <!-- Your Content Goes Here -->
+    {% block content %}
+  
+    {% endblock content %}
+<!-- ======= Footer ======= 
+<footer style="text-align: center;">
+    
+  <div class="footer-area-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="copyright text-center">
+            <p>
+              &copy; Copyright <strong>eBusiness</strong>. All Rights Reserved
+            </p>
+          </div>
+          <div class="credits">
+        
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
+          
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>End  Footer -->
+
+<div id="preloader"></div>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+ 
+<script src="{% static '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static '/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static '/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static '/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+
+<!-- Template Main JS File -->
+<script src="{% static '/assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

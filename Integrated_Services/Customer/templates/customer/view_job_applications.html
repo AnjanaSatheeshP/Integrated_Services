@@ -1,0 +1,108 @@
+{% extends 'customer/shared/base1.html' %}
+
+{% block content %}
+    <div style="text-align: center;">
+        <h3>View Work Request</h3>
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Work Type</th>
+                        <th scope="col">Work Details</th>
+                        <th scope="col">Applied Date</th>
+                        <th scope="col">Requested Date</th>                       
+                        <th scope="col">Status</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Feedback</th>
+                        <th scope="col"></th>
+                        
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in result %}
+                        <tr>
+                            <td>{{ i.department_id.dept_name }}</td>
+                            <td>{{ i.work_details }}</td>
+                            <td>{{ i.apply_date|date:"F j, Y" }}</td>
+                            <td>{{ i.work_date|date:"F j, Y" }}</td>
+                          
+                            <td><b>{{ i.status }}</b></td>
+                            <td><b>{{ i.rating }}</b></td>
+                            <td><b>{{ i.feedback_details }}</b></td>
+
+                            {%  if i.status == "Pending" %}
+                            <td><a href="/Customer/del_apply_job_byUser/{{ i.id }}" style="display: inline-block; text-decoration: none; color: #fff; padding: 8px 15px; background-color:#293157; border: 1px solid #46b8da; border-radius: 5px;" >Delete</a></td>
+
+                            {% endif %}
+                          
+                        </tr>
+                    {% endfor %}
+                    {% if not result %}
+                        <tr>
+                            <td colspan="6" class="text-center">No Job Applications</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <style>
+        .custom-table .name {
+            white-space: nowrap;
+            /* Prevent line breaks */
+        }
+    
+        .table-container {
+            margin: 0 auto;
+            /* Center the table */
+            width: 50%;
+            /* Adjust the width as needed */
+        }
+    
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            align-items: center;
+        }
+    
+        .custom-table th,
+        .custom-table td {
+            border: 1px solid transparent;
+            padding: 15px;
+            text-align: center;
+        }
+    
+        .custom-table th {
+            background-color: #293157;
+            color: #f2f2f2;
+        }
+    
+        .custom-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+    
+        }
+    
+        .custom-table .action-buttons a {
+            text-decoration: none;
+            color: #f2f2f2;
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+            display: inline-block;
+        }
+    
+        .custom-table .btn-danger {
+            background-color: #293157;
+            border-color: #d43f3a;
+        }
+    
+        .custom-table .text-center {
+            text-align: center;
+            color: #060606;
+        }
+    </style>
+{% endblock content %}

@@ -1,0 +1,139 @@
+{% extends 'Employee/shared/base1.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    .add-job-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .job-form {
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.341);
+        margin: 20px auto;
+        width: 50%;
+    }
+
+    h3 {
+        color: #07072b;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+    
+        margin-bottom: 5px;
+        color: #07072b;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 50%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #293157;
+        color: #f2f2f2;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+<br>
+<h3 style="color: #07072b; text-align: center;">View Location</h3>
+  <div class="add-job-container">
+    <div class="job-form">  
+<div id="map" style="width:915px;height:500px;"></div>
+<form action="" method="post">
+{% csrf_token %}
+    <input type="hidden" id="lat" name="latitude"/>
+    <input type="hidden" id="lng" name="longitude"/>
+    <input type="hidden" id="lat1" name="latitude1" value={{ lat }} />
+    <input type="hidden" id="lng1" name="longitude1" value={{ lng }} />
+    <!-- <input type="submit" class="btn btn-info py-3 w-50 mb-4" value="SAVE"/> -->
+</form>
+    </div>
+  </div>
+  
+
+<script>
+    var map;
+    
+    function initialize() {
+        lat=document.getElementById("lat1").value
+        lng=document.getElementById("lng1").value
+        console.log(lng)
+       // var haightAshbury = new google.maps.LatLng(11.882887, 75.373578);
+        var haightAshbury = new google.maps.LatLng(lat, lng);
+       // var haightAshbury = new google.maps.LatLng(8.5027295, 76.9419737);
+        var mapOptions = {
+            zoom: 12,
+            center: haightAshbury,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        google.maps.event.addListener(map, 'click', function (event) {
+          
+            addMarker(event.latLng);
+        });
+
+        var marker = new google.maps.Marker({
+        position: haightAshbury,
+        map: map
+    });
+    }
+
+
+
+
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBotyxSNBxTGq4ye8OANummi86cCB1ZY2w&callback=initialize"></script>
+<!--
+To use this code on your website, get a free API key from Google.
+Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+-->
+
+
+
+{% endblock content %}
+
+
+
+
+
+<!-- var marker;
+function addMarker(location) {
+   
+   
+    if (!marker) {
+        marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    } else {
+        marker.setPosition(location);
+    }
+
+//     alert(location.lat())
+//     alert(location.lng())
+
+    document.getElementById("lat").value=location.lat();
+    document.getElementById("lng").value=location.lng();
+
+} -->

@@ -1,0 +1,179 @@
+{% extends 'admin/shared/base1.html' %}
+
+
+{% block content %}
+<style>
+    .container {
+        text-align: center;
+        margin: 20px auto;
+        width: 80%;
+    }
+
+    .status-container {
+        width: 40%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+    }
+
+    h3 {
+        color: #333;
+    }
+
+    .status-form {
+        margin-top: 20px;
+    }
+
+    .status-form select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .status-form button {
+        background-color: #090f14;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="container">
+    <div class="status-container">
+        <div>
+            <h2 style="color: #090f14;">Work Status</h2>
+        </div>
+        <div class="status-form">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div>
+                    <select class="form-control" name="status" id="firstDropdown" onchange="handleFirstDropdownChange(this)">
+                        <option value="Select">Select Status Type</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Assigned">Assigned</option>
+                        <option value="OnGoing">OnGoing</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Paid">Paid</option>
+                    </select>
+                </div>
+                <button type="submit">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+                <hr>
+                <div class="table-container">
+                {% if result %}
+                    <table class="custom-table">
+                        <thead>
+                        <tr>
+
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Work Type</th>
+                            <th scope="col">Assigned Employee</th>
+                            <th scope="col">Work Details</th>
+                            <th scope="col">Applied Date</th>
+                            <th scope="col">Requested Date</th>
+                            <th scope="col">Work Status</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Feedback</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in result %}
+                        <tr>
+
+                            <td>{{i.user_id.first_name}} {{i.user_id.last_name}}</td>
+                            <td>{{i.user_id.email}}</td>
+                            <td>{{i.user_id.address}}</td>
+                            <td>{{i.department_id.dept_name}}</td>
+                            <td>{{i.employee_assigned_id.first_name}} {{i.employee_assigned_id.last_name}}</td>
+                            <td class="details">{{i.work_details}}</td>
+                            <td class="name">{{i.apply_date|date:"F j, Y"}}</td>
+                            <td class="name">{{i.work_date}}</td>
+                            <td> <b>{{i.status}}</b> </td>
+                            <td> <b>{{i.rating}}</b> </td>
+                            <td> <b>{{i.feedback_details}}</b> </td>
+                            
+
+                        </tr>
+                        {% endfor %}
+                       
+                    </tbody>
+                </table>
+                   {% else %}
+                <h3>No Data to Display</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+     .custom-table .details {
+        font-size: 10px;
+    }
+
+    .custom-table .name {
+        white-space: nowrap;
+        /* Prevent line breaks */
+    }
+    .table-container {
+        text-align: center;
+        margin: 20px auto;
+        width: 65%;
+
+    }
+
+    .custom-table {
+        width: 25%;
+        border-collapse: collapse;
+        margin: 20px auto;
+        border: 1px solid #ddd;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        border: 1px solid transparent;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .custom-table th {
+        background-color: #293157;
+        color: #f2f2f2;
+    }
+
+    .custom-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .custom-table .action-buttons a {
+        text-decoration: none;
+        color: #f2f2f2;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .custom-table .btn-warning {
+        background-color: #293157;
+        border-color: #eea236;
+    }
+</style>
+
+    {% endblock content %}

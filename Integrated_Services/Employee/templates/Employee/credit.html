@@ -1,0 +1,117 @@
+{% extends 'Employee/shared/base1.html' %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    .credit-details {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .credit-container {
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.325);
+        margin: 20px auto;
+        width: 50%;
+    }
+
+    h3, h4 {
+        color: #07072b;
+    }
+
+    b {
+        color: black;
+    }
+</style>
+
+<div class="credit-details">
+    <div class="credit-container">
+        <h2 style="color: #07072b;">Salary Details</h2>
+        <h4>Total Amount Credited: <b>₹ {{ data.total }} </b></h4>
+    </div>
+</div>
+
+<hr>
+
+<style>
+    .table-container {
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    .custom-table {
+        width: 50%;
+        border-collapse: collapse;
+        margin: 20px auto;
+        border: 1px solid #ddd;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        border: 1px solid transparent;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .custom-table th {
+        background-color: #293157;
+        color: #f2f2f2;
+    }
+
+    .custom-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+
+<div class="table-container">
+    <div>
+        <div>
+            <div>
+                <h2 style="color: #293157;">Payment Details</h2>
+            </div>
+            <div>
+
+            {% if result %}
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Work Type</th>
+                            <th scope="col">Work Details</th>
+                            <th scope="col">Work Date</th>
+                            <th scope="col">Work Completed Date</th>
+                            <th scope="col">Credited Amount</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in result %}
+                        <tr>
+                            <td>{{i.user_id.first_name}} {{i.user_id.last_name}}</td>
+                            <td>{{i.user_id.email}}</td>
+                            <td>{{i.user_id.address}}</td>
+                            <td>{{i.department_id.dept_name}}</td>
+                            <td>{{i.work_details}}</td>
+                            <td>{{i.work_date}}</td>
+                            <td>{{i.status_updated |date:"F j, Y" }}</td>
+                            <td>{{i.emp_amount}}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                       
+                    </tbody>
+                </table>
+
+                   {% else %}
+                <h3>No Data to Display</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

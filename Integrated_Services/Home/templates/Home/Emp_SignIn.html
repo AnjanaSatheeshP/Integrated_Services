@@ -1,0 +1,35 @@
+{% extends 'Home/shared/base1.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Sign In Start -->
+<section id="signInSection2">
+    <br><BR><br><BR>
+    <div class="container">
+        <div class="row">
+            <!-- Image Section -->
+            <div class="col-md-6">
+                <img src="{% static 'assets/img/about/log.jpg' %}" alt="Your Image Alt Text" style="max-width: 100%; height: 125%;">
+            </div>
+            
+            <!-- Sign In Form Section -->
+            <div class="col-md-5">
+                <div class="sign-in-form">
+                    <h2 style="color: #07072b;">Employee Sign In</h2>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="username" placeholder="Username" required id="floatingInput" style="width: 100%; padding: 15px; margin: 10px 0; box-sizing: border-box; border: 1px solid #b3d1e0; border-radius: 6px;"><br><br>
+                        <input type="password" name="password" placeholder="Password" required id="floatingPassword" style="width: 100%; padding: 15px; margin: 10px 0; box-sizing: border-box; border: 1px solid #b3d1e0; border-radius: 6px;"><br><br>
+                        <button type="submit" class="btn btn-info py-2 w-100 mb-5" style="background-color: #07072b; color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer;"><b>Log In</b></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+</section>
+<!-- Sign In End -->
+
+{% endblock content %}

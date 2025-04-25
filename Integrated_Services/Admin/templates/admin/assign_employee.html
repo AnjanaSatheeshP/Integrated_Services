@@ -1,0 +1,105 @@
+{% extends 'admin/shared/base1.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="table-container">
+        <h3 style="text-align: center;color:#293157">Employee Details</h3>
+
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Work Type</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Experience</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                    <tr>
+                        <td style="white-space: nowrap;">{{ i.employee_id.first_name }} {{ i.employee_id.last_name }}</td>
+                        <td>{{ i.employee_id.email }}</td>
+                        <td>{{ i.department_id.dept_name }}</td>
+                        <td>{{ i.phone_number }}</td>
+                        <td>{{ i.salary }}</td>
+                        <td>{{ i.experience }}</td>
+                        <td>
+                            <a href="{% url 'assign_employee' eid=i.employee_id_id jid=job %}" style="display: inline-block; text-decoration: none; color: #fff; padding: 8px 15px; background-color:#293157; border: 1px solid #46b8da; border-radius: 5px;">
+                                Assign Employee
+                            </a>
+                            
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if not data %}
+            <p class="text-center">No Employee In List</p>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .custom-table .name {
+        white-space: nowrap;
+        /* Prevent line breaks */
+    }
+
+    .table-container {
+        margin: 0 auto;
+        /* Center the table */
+        width: 50%;
+        /* Adjust the width as needed */
+    }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        align-items: center;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        border: 1px solid transparent;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .custom-table th {
+        background-color: #293157;
+        color: #f2f2f2;
+    }
+
+    .custom-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .custom-table .action-buttons a {
+        text-decoration: none;
+        color: #f2f2f2;
+        padding: 8px 15px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .custom-table .btn-danger {
+        background-color: #293157;
+        border-color: #d43f3a;
+    }
+
+    .custom-table .text-center {
+        text-align: center;
+        color: #060606;
+    }
+</style>
+
+{% endblock content %}
