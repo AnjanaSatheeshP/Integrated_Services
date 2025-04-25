@@ -1,12 +1,14 @@
 # Integrated Services - Community Labour Service Portal
 
-**Integrated Services** is a groundbreaking web-based platform designed to connect local communities with skilled laborers. It serves as a comprehensive digital marketplace where users can easily find and book service providers for essential tasks, including plumbing, carpentry, electrical work, gardening, and coconut plucking.
+**Integrated Services** is a web app designed to solve household issues by connecting customers with daily wage workers like plumbers, carpenters, and cleaners. It has three modules—Admin, Customer, and Employee. Built using Django for its efficient, secure, and feature-rich web development support
 
 ---
 
 ## 🚀 Project Overview
 
-This platform aims to bridge the gap between service seekers and local laborers by offering a streamlined, user-friendly interface for both parties. Whether for a Panchayat or any other local governing body, the platform provides an effective solution to fulfill everyday labour needs within the community.
+This webpage was made to fulfill the needs of customers with Household problems. In this website, workers are allotted on the basis of daily wages, and it may contain workers like plumbers, carpenters, gardeners, cleaners, etc. There are basically three modules in my website: admin, Customer, and employee. Here, the Admin has the overall control over allotting the work requested by the customer to the respective employees.
+
+Used Python Django because it helps us build web applications quickly and efficiently. It offers many built-in features, like authentication and an admin interface, which simplify development. 
 
 ---
 
