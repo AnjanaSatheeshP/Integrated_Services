@@ -44,8 +44,7 @@ This platform aims to bridge the gap between service seekers and local laborers 
 
 - **Frontend**: HTML, CSS, JavaScript, Bootstrap  
 - **Backend**: Python, Django (structure supported)  
-- **Database**: SQLite (or any preferred relational DB)  
-- **Other Tools**: Email service integration for feedback  
+- **Database**: SQLite (or any preferred relational DB)   
 
 ---
 
